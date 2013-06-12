@@ -1,0 +1,13 @@
+{
+   "name": "pond",
+   "version": "0.0.1",
+   "author": "Cyborg",
+   "description": "Data mining on a pond",
+   "dependencies": {
+      "express": "*",
+      "zombie": "*",
+      "expect.js": "*",
+      "jade": "*",
+      "twitter": "*"
+   }
+}

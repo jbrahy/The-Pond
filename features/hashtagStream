@@ -1,0 +1,9 @@
+Feature:Hash Tag stream
+
+As a twitter user
+I want to print all tweets with a certian hashtag
+so that I can monitor certian events
+
+Given: Twitter Account set up and a hashtag
+When: a new msg hits twitter with that hash tag
+Then: print the tweet text to my console
