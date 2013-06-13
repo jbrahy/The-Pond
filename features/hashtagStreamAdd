@@ -1,0 +1,10 @@
+Feature:Hash Tag Stream Add
+
+I want to start hashtag streams on a web page
+As a user
+So that I can monitor hashtags on a page
+
+Situation 1:
+Given: I have a server running
+When: I type in a hashtag and press submit
+Then: I start a stream with the hashtag and print the contents to console

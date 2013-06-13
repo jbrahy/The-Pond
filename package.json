@@ -8,6 +8,8 @@
       "zombie": "*",
       "expect.js": "*",
       "jade": "*",
-      "twitter": "*"
+      "twitter": "*",
+      "mongoose": "*"
+
    }
 }
