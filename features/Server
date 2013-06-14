@@ -1,9 +1,0 @@
-Feature:MongoDB Database
-
-In order to add tweets
-As a user
-I should create a mongo DB database
-
-Given:A tweet server
-When:A tweet occurs
-Then:Store it into a database

@@ -1,4 +1,8 @@
-    twit = require('twit');
+var twit = require('twit');
+var tweetModel = require('./model/tweetModel.js');
+
+
+
 
 var twitt = new twit({
     consumer_key: 'ObEAEbrbltL7CiWDiJMw',
@@ -12,9 +16,10 @@ function filterStream(hashTag){
    var stream = twitt.stream('statuses/filter', {track: hashTag}) ;
 
    stream.on('tweet', function(tweet){
-      console.log(tweet.text); 
+      tweetModel.addTweet(tweet);
    });
-}
+   
+};
 
 exports.filterStream = filterStream;
 
