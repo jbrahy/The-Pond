@@ -3,7 +3,6 @@ var tweetModel = require('./model/tweetModel.js');
 var tweetRate = 0;
 var oldTime = 0;
 var tweetCount = 0;
-var myDate = new Date();
 
 
 
@@ -19,7 +18,7 @@ function filterStream(hashTag){
    var stream = twitt.stream('statuses/filter', {track: hashTag}) ;
 
    stream.on('tweet', function(tweet){
-      countRate();
+      //countRate();
       tweetModel.addTweet(tweet, function(){
          tweetModel.findLast(function(){
             console.log(tweetModel.getLast());
@@ -30,12 +29,12 @@ function filterStream(hashTag){
 
 function countRate(){
    if (tweetCount == 0){
-      oldTime = new myDate.getTime()
+      //oldTime = new myDate.getTime()
    }
    tweetCount ++;
    if (tweetCount % 10 == 0){
-      tweetRate = 10/myDate.getTime()-oldTime; 
-      oldTime = myDate.getTime();
+      //tweetRate = 10/myDate.getTime()-oldTime; 
+      //oldTime = myDate.getTime();
    }
 }
 

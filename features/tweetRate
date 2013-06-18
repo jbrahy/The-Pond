@@ -1,0 +1,7 @@
+As a user
+In order to see the popularity of a hashtag
+I should print out the tweet rate 
+
+Given: A HTStream is open
+When: 10 tweets have been recieved
+Then: Display TweetRate = (10/35)*60

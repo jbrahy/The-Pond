@@ -1,0 +1,9 @@
+Feature:MongoDB Database
+
+In order to add tweets
+As a user
+I should store tweets from stream into database
+
+Given:A tweet server and database
+When:A tweet occurs
+Then:Store it into a database
