@@ -6,6 +6,6 @@ module.exports.indexGet = function(req, res){
 
 module.exports.htstreamPost = function(req, res){
    twitter.filterStream(req.body.hashtag)
-   res.render('index',{title: 'Pond'});
+   res.redirect('/');
 };
 
