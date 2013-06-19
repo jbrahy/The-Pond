@@ -9,7 +9,9 @@
       "expect.js": "*",
       "jade": "*",
       "twitter": "*",
-      "mongoose": "*"
+      "mongoose": "*",
+      "stylus":  "*",
+      "nib":     "*"
 
    }
 }

@@ -9,3 +9,10 @@ module.exports.htstreamPost = function(req, res){
    res.redirect('/');
 };
 
+module.exports.surveyGet = function(req, res){
+   res.render('survey', {title:'Survey'});
+};
+
+module.exports.csvisGet = function(req, res){
+   res.render('csviz', {title:'csviz'});
+};
