@@ -5,7 +5,7 @@ module.exports.indexGet = function(req, res){
 };
 
 module.exports.htstreamPost = function(req, res){
-   twitter.filterStream(req.body.hashtag)
+   twitter.filterStream(req.body.hashtag);
    res.redirect('/');
 };
 
@@ -15,4 +15,14 @@ module.exports.surveyGet = function(req, res){
 
 module.exports.csvisGet = function(req, res){
    res.render('csviz', {title:'csviz'});
+};
+
+module.exports.getOnePercent = function(req, res){
+   twitter.getOnePercent();
+   res.redirect('/');
+};
+
+module.exports.getTerm = function(req, res){
+   console.log(twitter.getTerm(req.query.term));
+
 };

@@ -3,6 +3,10 @@ var tweetModel = require('./model/tweetModel.js');
 var tweetRate = 0;
 var oldTime = 0;
 var tweetCount = 0;
+var solr = require('solr');
+var res;
+
+var client = solr.createClient({host:'127.0.0.1', port:'8080', core:'', path: '/solr'})
 
 
 
@@ -19,13 +23,41 @@ function filterStream(hashTag){
 
    stream.on('tweet', function(tweet){
       //countRate();
-      tweetModel.addTweet(tweet, function(){
-         tweetModel.findLast(function(){
-            console.log(tweetModel.getLast());
-         });
-      });
-   });
+      console.log(tweet.id + ' ' + tweet.text);
+      var doc = {id:tweet.id, title_t: 'Tweet' + tweet.id, text_t: tweet.text, date_t: tweet.created_at}
+      tweetCount++;
+      client.add(doc, function(err){
+         if (err) throw err;
+         console.log('Tweet added');
+         client.commit(function(err){if(err) console.log('Error');});
+     });
+  });
 };
+
+function getOnePercent(){
+   var stream = twitt.stream('statuses/filter', {}) ;
+
+   stream.on('tweet', function(tweet){
+      //countRate();
+      console.log(tweet.id + ' ' + tweet.text);
+      console.log("Date:"+ tweet.created_at);
+      var doc = {id:tweet.id, title_t: 'Tweet' + tweet.id, text_t: tweet.text, user_t:tweet.user, date_t:tweet.created_at};
+      tweetCount++;
+      client.add(doc, function(err){
+         if (err) throw err;
+         console.log('Tweet added');
+         client.commit(function(err){if(err) console.log('Error');});
+     });
+  });
+};
+
+function queryText(term){
+   client.query(term, function err, response){
+      res = response
+   }
+   return res;
+};
+
 
 function countRate(){
    if (tweetCount == 0){
@@ -40,8 +72,8 @@ function countRate(){
 
 
 exports.filterStream = filterStream;
-
-
+exports.getOnePercent = getOnePercent;
+exports.queryText = queryText;
 
 
 
