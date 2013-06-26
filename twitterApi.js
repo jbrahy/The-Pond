@@ -3,10 +3,10 @@ var tweetModel = require('./model/tweetModel.js');
 var tweetRate = 0;
 var oldTime = 0;
 var tweetCount = 0;
-var solr = require('solr');
-var res;
+var routes = require('./routes/routes.js');
+var solrFunc = require('./solrFunc.js');
+var client = solrFunc.client;
 
-var client = solr.createClient({host:'127.0.0.1', port:'8080', core:'', path: '/solr'})
 
 
 
@@ -51,11 +51,11 @@ function getOnePercent(){
   });
 };
 
-function queryText(term){
-   client.query(term, function err, response){
-      res = response
-   }
-   return res;
+function getTerm(term, res){
+   client.query('text_t:'+term, function(err, response){
+      console.log(routes.tweets);
+      res.json(response);
+   });
 };
 
 
@@ -73,7 +73,7 @@ function countRate(){
 
 exports.filterStream = filterStream;
 exports.getOnePercent = getOnePercent;
-exports.queryText = queryText;
+exports.getTerm = getTerm;
 
 
 

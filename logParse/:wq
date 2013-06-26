@@ -1,0 +1,37 @@
+var fs = require('fs'),
+    byline = require('byline');
+var getFloat = require('./getFloat.js');
+var data = [];
+
+var stream = byline(fs.createReadStream('logfile.log'));
+
+function get_type(thing){
+    if(thing===null)return "[object Null]"; // special case
+    return Object.prototype.toString.call(thing);
+}
+
+var i = 0;
+stream.on('data', function(line) { 
+   var j = 0;
+   // Do stuff here 
+   var splitted = line.split(/[,]+/);
+
+   var entity = getFloat(splitted[2]);
+   console.log(entity);
+   //console.log(entity[0]);
+   
+   var temp = {
+      'date':splitted[0],
+      'text':splitted[1],
+      'likelyhood':((splitted[2].match(/[+-]?\d+(\.\d+)?$/))),
+      'alertpct':splitted[3],
+      'normalpct':splitted[4],
+      'srcip':splitted[5],
+      'dst_ip_addr':splitted[6],
+      'srcport':splitted[7],
+      'dst_port':splitted[8]
+   }
+   data[i] = temp;
+   i++;
+  // console.log(temp);
+});

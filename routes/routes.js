@@ -1,4 +1,5 @@
 var twitter = require('../twitterApi.js');
+var rres;
 
 module.exports.indexGet = function(req, res){
    res.render('index', {title: 'Pond'});
@@ -23,6 +24,14 @@ module.exports.getOnePercent = function(req, res){
 };
 
 module.exports.getTerm = function(req, res){
-   console.log(twitter.getTerm(req.query.term));
+   console.log(req.ip);
+   this.rres = res;
+   var obj = twitter.getTerm(req.query.term, res);
+};
 
+module.exports.send = function(response){
+   //this.rres.json(JSON.parse(response));
+};
+
+module.exports.getDateRange = function(req, res){
 };

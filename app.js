@@ -25,6 +25,8 @@ app.set('views', __dirname + '/views');
 app.get('/', routes.indexGet);
 app.get('/survey', routes.surveyGet);
 app.get('/csviz', routes.csvisGet);
+app.get('/getterm', routes.getTerm);
+app.get('/getdaterange', routes.getDateRange);
 
 app.post('/htstream', routes.htstreamPost);
 
