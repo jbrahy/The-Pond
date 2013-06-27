@@ -1,6 +1,8 @@
 var lineReader = require('line-reader');
 var jf = require('jsonfile');
 var tools = require('./getFloat.js');
+var moment = require('moment');
+moment().format();
 var data = [];
 var i = 0;
 var file = 'data.json';
@@ -19,7 +21,7 @@ var streamon = function(line)  {
    var splitted = line.split(/[,]+/);
    
    data[i] = {
-      'date':splitted[0],
+      'date':moment(splitted[0], 'MMM DD YYYY HH:mm:ss').valueOf(),
       'text':splitted[1],
       'likelyhood':(tools.getFloat(splitted[2])[0]),
      // 'alertpct':(getFloat(splitted[3])[0]),
