@@ -1,7 +1,9 @@
 var lineReader = require('line-reader');
+var jf = require('jsonfile');
 var tools = require('./getFloat.js');
 var data = [];
 var i = 0;
+var file = 'data.json';
 
 
 function get_type(thing){
@@ -11,13 +13,12 @@ function get_type(thing){
 
 
 var streamon = function(line)  { 
-
    if(line.length > 1){
    var j = 0;
    // Do stuff here 
    var splitted = line.split(/[,]+/);
    
-   var temp = {
+   data[i] = {
       'date':splitted[0],
       'text':splitted[1],
       'likelyhood':(tools.getFloat(splitted[2])[0]),
@@ -28,15 +29,19 @@ var streamon = function(line)  {
       'srcport':(tools.getFloat(splitted[7])[0]),
       'dst_port':(tools.getFloat(splitted[8])[0]),
    }
-   
-   data[i] = temp
+
    i++;
    console.log(data.length)
    }
+  else{
+     jf.writeFile(file, data, function(err){
+        console.log(err); 
+     });
+  }
 };
 
 module.exports.readFile = function(){
-   lineReader.eachLine('logfile.log', streamon);
+   lineReader.eachLine('logfile.log', streamon).then(console.log(data));
    
 }
 
