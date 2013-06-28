@@ -1,4 +1,5 @@
 var twitter = require('../twitterApi.js');
+var solrFunc = require('../solrFunc.js');
 var rres;
 
 module.exports.indexGet = function(req, res){
@@ -34,4 +35,6 @@ module.exports.send = function(response){
 };
 
 module.exports.getDateRange = function(req, res){
+   solrFunc.getRange(req.query.t1, req.query.t2, req, res);
 };
+

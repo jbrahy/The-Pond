@@ -6,6 +6,9 @@ var tweetCount = 0;
 var routes = require('./routes/routes.js');
 var solrFunc = require('./solrFunc.js');
 var client = solrFunc.client;
+var moment = require('moment');
+moment().format();
+
 
 
 
@@ -24,7 +27,9 @@ function filterStream(hashTag){
    stream.on('tweet', function(tweet){
       //countRate();
       console.log(tweet.id + ' ' + tweet.text);
-      var doc = {id:tweet.id, title_t: 'Tweet' + tweet.id, text_t: tweet.text, date_t: tweet.created_at}
+      var tweetDate = moment(tweet.created_at, 'ddd MMM DD HH:mm:ss Z YYYY').valueOf();
+      console.log("Date:"+ tweetDate);
+      var doc = {id:tweet.id, title_t: 'Tweet' + tweet.id, text_t: tweet.text, date_t:tweetDate }
       tweetCount++;
       client.add(doc, function(err){
          if (err) throw err;
@@ -39,9 +44,9 @@ function getOnePercent(){
 
    stream.on('tweet', function(tweet){
       //countRate();
-      console.log(tweet.id + ' ' + tweet.text);
-      console.log("Date:"+ tweet.created_at);
-      var doc = {id:tweet.id, title_t: 'Tweet' + tweet.id, text_t: tweet.text, user_t:tweet.user, date_t:tweet.created_at};
+      var tweetDate = moment(tweet.created_at, 'ddd MMM DD HH:mm:ss Z YYYY');
+      console.log('Date:' + tweetDate);
+      var doc = {id:tweet.id, title_t: 'Tweet' + tweet.id, text_t: tweet.text, user_t:tweet.user, date:tweet.created_at};
       tweetCount++;
       client.add(doc, function(err){
          if (err) throw err;
