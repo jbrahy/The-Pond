@@ -1,0 +1,7 @@
+In order to see the occurance of memes over time
+I want to see a hashtag rate calculator
+
+
+When I submit a hashtag to watch
+Then calculate the rate per minute of tweets comming out of that hashtag.
+

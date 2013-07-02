@@ -1,5 +1,6 @@
-var twitter = require('../twitterApi.js');
-var solrFunc = require('../solrFunc.js');
+var twitter = require('../myLibs/twitterApi.js');
+var solrFunc = require('../myLibs/solrFunc.js');
+var youtube = require('../myLibs/youtubeApi.js');
 var rres;
 
 module.exports.indexGet = function(req, res){
@@ -25,9 +26,13 @@ module.exports.getOnePercent = function(req, res){
 };
 
 module.exports.getTerm = function(req, res){
+   term = req.query.term;
+   //if (req.query.type = 'youtube'){
+    //  youtube.getTerm(res, req, term);
+   //} 
    console.log(req.ip);
    this.rres = res;
-   var obj = twitter.getTerm(req.query.term, res);
+   var obj = twitter.getTerm(term, res);
 };
 
 module.exports.send = function(response){
@@ -37,4 +42,6 @@ module.exports.send = function(response){
 module.exports.getDateRange = function(req, res){
    solrFunc.getRange(req.query.t1, req.query.t2, req, res);
 };
+
+
 
