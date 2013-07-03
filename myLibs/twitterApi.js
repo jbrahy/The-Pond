@@ -23,7 +23,7 @@ var twitt = new twit({
 
 
 function filterStream(hashTag){
-   var tweetConnection = {tweetCount:0}
+   var tweetConnection = {tweetCount:0, client: client}
    tweetConnection.incrementTweetCount = function (){
       this.tweetCount ++;
    }
@@ -32,7 +32,7 @@ function filterStream(hashTag){
       this.tweetCount = 0;
    }
    
-   tweetConnection.io = require('socket.io').listen(4000);
+   //tweetConnection.io = require('socket.io').listen(4000);
 
    var stream = twitt.stream('statuses/filter', {track: hashTag}) ;
    //var timer = setInterval(dTweetDt.startRate, 5000);
