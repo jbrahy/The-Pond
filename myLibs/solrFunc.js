@@ -22,3 +22,9 @@ module.exports.getRangeAndTerms = function(d1, d2, t, req, res){
       });
    }
 };
+
+module.exports.tweetRate = function(d1, d2, t, req, res){
+      client.query('date_t:[' + d1 + ' TO ' + d2 + '] AND hashTag_t:'+t +' AND type_t:tweet_rate', function(err, response){
+         res.json(response);
+      });
+};

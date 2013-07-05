@@ -9,7 +9,7 @@ module.exports.indexGet = function(req, res){
 
 module.exports.htstreamPost = function(req, res){
    twitter.filterStream(req.body.hashtag);
-   res.redirect('/');
+   res.json('OK');
 };
 
 module.exports.surveyGet = function(req, res){
@@ -48,5 +48,10 @@ module.exports.getDateRange = function(req, res){
    }
 };
 
+module.exports.tweetRate = function(req, res){
+   solrFunc.tweetRate(req.query.t1, req.query.t2, req.query.term, req, res);
+};
 
-
+module.exports.tr = function(req, res){
+   res.render('tweetRate'); 
+}

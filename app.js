@@ -27,6 +27,8 @@ app.get('/survey', routes.surveyGet);
 app.get('/csviz', routes.csvisGet);
 app.get('/getterm', routes.getTerm);
 app.get('/getdaterange', routes.getDateRange);
+app.get('/tweetRate', routes.tweetRate);
+app.get('/tr', routes.tr);
 
 
 
