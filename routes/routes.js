@@ -40,7 +40,12 @@ module.exports.send = function(response){
 };
 
 module.exports.getDateRange = function(req, res){
-   solrFunc.getRange(req.query.t1, req.query.t2, req, res);
+   if (req.query.term != null){
+      solrFunc.getRangeAndTerms(req.query.t1, req.query.t2, req.query.term, req, res);
+      console.log("term != null");
+   }else{
+      solrFunc.getRange(req.query.t1, req.query.t2, req, res);
+   }
 };
 
 

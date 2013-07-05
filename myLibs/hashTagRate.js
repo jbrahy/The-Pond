@@ -10,8 +10,8 @@ module.exports.startRate = function(tc){
          tc.clearTweetCount();
          var currentTime = (new Date).getTime();
          var newid = crypto.createHash('sha1').update('tweet_rate' + currentTime).digest('hex');
-         console.log(newid);
-         var doc = {id: newid, type_t: 'tweet_rate', rate_i:parseInt(tweetRate) , date_t:currentTime }
+         console.log('Hashtag:' + tc.hashTag + ' ='+ newid);
+         var doc = {id: newid, type_t: 'tweet_rate', rate_i:parseInt(tweetRate) , date_t:currentTime, hashTag_t:tc.hashTag }
          //newid++;
          tc.client.add(doc, function(err){
             if (err) throw err;

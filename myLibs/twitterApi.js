@@ -8,6 +8,8 @@ var solrFunc = require('./solrFunc.js');
 var client = solrFunc.client;
 var moment = require('moment');
 var dTweetDt = require('./hashTagRate.js');
+var htArray = [];
+var tweetConnections = {};
 moment().format();
 
 
@@ -23,7 +25,7 @@ var twitt = new twit({
 
 
 function filterStream(hashTag){
-   var tweetConnection = {tweetCount:0, client: client}
+   var tweetConnection = {tweetCount:0, client: client, hashTag:hashTag}
    tweetConnection.incrementTweetCount = function (){
       this.tweetCount ++;
    }
@@ -31,16 +33,30 @@ function filterStream(hashTag){
    tweetConnection.clearTweetCount = function (){
       this.tweetCount = 0;
    }
+
+   tweetConnections[hashTag] = tweetConnection
+  
    
    //tweetConnection.io = require('socket.io').listen(4000);
 
-   var stream = twitt.stream('statuses/filter', {track: hashTag}) ;
+   htArray.push(hashTag);
+   var stream = twitt.stream('statuses/filter', {track: htArray}) ;
    //var timer = setInterval(dTweetDt.startRate, 5000);
    dTweetDt.startRate(tweetConnection);
    stream.on('tweet', function(tweet){
-      tweetConnection.incrementTweetCount();
+      console.log('\n\n\n\n\n');
+      for (var ht in htArray){
+         console.log('Testing if tweet '+tweet.text+' contains ' + htArray[ht]);   
+         console.log(tweet.entities.hashtags);
+         for (tht in tweet.entities.hashtags){
+            if (htArray[ht].valueOf().toLowerCase().slice(1) === tweet.entities.hashtags[tht].text.valueOf().toLowerCase()){
+               tweetConnections[htArray[ht]].incrementTweetCount(); 
+               console.log("This tweet is from hashtag " + htArray[ht]);
+            }
+         }
+      }
+      tweetConnections[hashTag].incrementTweetCount();
       //countRate();
-      console.log(tweet.id + ' ' + tweet.text);
       var tweetDate = moment(tweet.created_at, 'ddd MMM DD HH:mm:ss Z YYYY').valueOf();
       console.log("Date:"+ tweetDate);
       var doc = {id:tweet.id, type_t: 'tweet', text_t: tweet.text, date_t:tweetDate }
@@ -78,9 +94,6 @@ function getTerm(term, res){
       res.json(response);
    });
 };
-
-
-
 
 
 
