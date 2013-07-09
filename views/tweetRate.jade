@@ -1,7 +1,10 @@
 !!!5
 head
+	script(src='js/d3.v3.js')
+	link(type='text/css',rel='stylesheet', href='css/chartStyle.css');
 body
 	p HelloWorld
 	form(action = '/htstream', method='post')
 		input(type = 'text', name = 'hashtag')
 		input(type = 'submit', value = 'submit')
+	script(src='js/rateVis.js')
