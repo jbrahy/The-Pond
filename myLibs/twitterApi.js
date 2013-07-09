@@ -6,6 +6,7 @@ var tweetCount = 0;
 var routes = require('../routes/routes.js');
 var solrFunc = require('./solrFunc.js');
 var client = solrFunc.client;
+var clienta = solrFunc.clienta;
 var moment = require('moment');
 var dTweetDt = require('./hashTagRate.js');
 var htArray = [];
@@ -61,10 +62,10 @@ function filterStream(hashTag){
       console.log("Date:"+ tweetDate);
       var doc = {id:tweet.id, type_t: 'tweet', text_t: tweet.text, date_t:tweetDate }
       tweetCount++;
-      client.add(doc, function(err){
+      clienta.add(doc, function(err){
          if (err) throw err;
          console.log('Tweet added');
-         client.commit(function(err){if(err) console.log('Error');});
+         clienta.commit(function(err){if(err) console.log('Error');});
      });
   });
 };
