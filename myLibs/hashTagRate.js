@@ -13,10 +13,10 @@ module.exports.startRate = function(tc){
          console.log('Hashtag:' + tc.hashTag + ' ='+ newid);
          var doc = {id: newid, type_t: 'tweet_rate', rate_i:parseInt(tweetRate) , date_t:currentTime, hashTag_t:tc.hashTag }
          //newid++;
-         tc.client.add(doc, function(err){
+         tc.clienta.add(doc, function(err){
             if (err) throw err;
             console.log('Tweet added');
-            tc.client.commit(function(err){if(err) console.log('Error');});
+            tc.clienta.commit(function(err){if(err) console.log('Error');});
         });
 
       }), sampleTime);

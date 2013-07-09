@@ -26,7 +26,7 @@ var twitt = new twit({
 
 
 function filterStream(hashTag){
-   var tweetConnection = {tweetCount:0, client: client, hashTag:hashTag}
+   var tweetConnection = {tweetCount:0, client: client, clienta:clienta,  hashTag:hashTag}
    tweetConnection.incrementTweetCount = function (){
       this.tweetCount ++;
    }
